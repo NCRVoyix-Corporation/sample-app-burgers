@@ -192,37 +192,42 @@ def viewCart(request):
             except json.JSONDecodeError as e:
                 print(f"[ERROR] Failed to decode cart: {e}")
                 cart = None
+        
+        if cart is None:
+            cart = []
 
         results = []
-        toppingColumns = ""
-        if cart != None:
-            for items in cart:
-                if len(items['toppings']) % 4 == 0:
-                    for numCols in range(int(len(items['toppings']) / 4)):
-                        toppingColumns += "a"
-                else:
-                    for numCols in range(int(len(items['toppings']) / 4 + 1)):
-                        toppingColumns += "a"
+        for items in cart:
+            if not isinstance(items, dict):
+                continue
+            
+            toppings = items.get('toppings') or []
+            if len(toppings) % 4 == 0:
+                toppingColumns = "a" * (len(toppings) // 4) if toppings else ""
+            else:
+                toppingColumns = "a" * (len(toppings) // 4 + 1)
 
-                iteminfo = {
-                    'id': items['id'],
-                    'image': items['image'],
-                    'displayName': items['displayName'],
-                    'description': items['description'],
-                    'price': items['price'],
-                    'tags': items['tags'],
-                    'toppings': items['toppings'],
-                    'quantity': items['quantity'],
-                    'toppingColumns': toppingColumns
-                }
-                toppingColumns = ""
-                results.append(iteminfo)
+            iteminfo = {
+                'id': items.get('id'),
+                'image': items.get('image', ''),
+                'displayName': items.get('displayName', ''),
+                'description': items.get('description', ''),
+                'price': items.get('price', '$0.00'),
+                'tags': items.get('tags', []),
+                'toppings': toppings,
+                'quantity': items.get('quantity', 1),
+                'toppingColumns': toppingColumns
+            }
+            results.append(iteminfo)
+        
+        safe_location = location if location else 'Midtown'
+        safe_time = time if time else 'Lunch'
 
         context = {
             'locations': MATCHES,
             'cart': results,
             'total': total,
-            'menuLink': '/Peachtree-Burger/Menu/' + location.capitalize() + '/' + time
+            'menuLink': '/Peachtree-Burger/Menu/' + safe_location.capitalize() + '/' + safe_time
         }
 
         return render(request, 'viewCart.html', context)
