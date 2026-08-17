@@ -186,12 +186,20 @@ def viewCart(request):
         if request.is_ajax() and request.POST.get('cart', None) != None:
             request.session['cart'] = request.POST.get('cart', None)
 
-        if request.session.get('cart'):
+        raw_cart = request.session.get('cart')
+        if raw_cart:
             try:
-                cart = json.loads(request.session['cart'])  # decode only once
+                if isinstance(raw_cart, str):
+                    cart = json.loads(raw_cart)
+                    if isinstance(cart, str):
+                        cart = json.loads(cart)
+                elif isinstance(raw_cart, list):
+                    cart = raw_cart
+                else:
+                    cart = []
             except json.JSONDecodeError as e:
                 print(f"[ERROR] Failed to decode cart: {e}")
-                cart = None
+                cart = []
         
         if cart is None:
             cart = []
