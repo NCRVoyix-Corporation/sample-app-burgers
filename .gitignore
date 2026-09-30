@@ -53,6 +53,10 @@ coverage.xml
 *.cover
 .hypothesis/
 
+# testing
+/frontend-test/vendor/*.tgz
+
+
 # Translations
 *.mo
 *.pot

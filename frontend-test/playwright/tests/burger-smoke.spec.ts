@@ -7,7 +7,7 @@ test.beforeEach(async ({ page, restaurantSampleAppUrl }) => {
     await page.goto(restaurantSampleAppUrl);
 });
 
-test('Restaurant Sample App - Smoke', async ({ page }, testInfo) => {
+test('Restaurant Sample App - Smoke', async ({ page }) => {
     const midtown = loadTestDataFile<TestData.Location>('location', 'midtown.json');
     const highland = loadTestDataFile<TestData.Location>('location', 'highland.json');
     const southland = loadTestDataFile<TestData.Location>('location', 'southland.json');

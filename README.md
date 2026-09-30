@@ -62,6 +62,12 @@ The sample app should open to the main page, where the user can select which res
 -   Users orders will then be processed and the user will be greeted by a finish line screen thanking them for taking the time to use the app.
 -   The user can then choose to press the "Get Started" button to be directed back to the hom page. The browser wil also launch a new tab leading to the Developer Experience Knowlege Hub.
 
+### Frontend test setup
+
+The Playwright tests under `frontend-test/` depend on a private internal package tarball that is not committed to this public repository.
+
+If you are an internal user and need to run those tests, see [`frontend-test/vendor/README.md`](./frontend-test/vendor/README.md) for setup details.
+
 ## Notes
 
 The following APIs from the Business Services Platform are used in the NCR Burger Demo Application. You can learn more about each API by clicking on it in the list below.

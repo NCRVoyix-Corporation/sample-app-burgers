@@ -1,4 +1,5 @@
 /env/*.env
+/vendor/*.tgz
 # Playwright
 /node_modules
 /test-results/
