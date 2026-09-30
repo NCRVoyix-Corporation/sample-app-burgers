@@ -1,0 +1,3 @@
+[submodule "frontend-test/shared/devex-frontend-test-kit"]
+	path = frontend-test/shared/devex-frontend-test-kit
+	url = https://github.com/ncrvoyix-bsp/devex-frontend-test-kit
