@@ -56,7 +56,6 @@ coverage.xml
 # testing
 /frontend-test/vendor/*.tgz
 
-
 # Translations
 *.mo
 *.pot
