@@ -1,5 +1,5 @@
 {
-    "name": "burger-consumer-frontend-test-example",
+    "name": "burger-frontend-test",
     "private": true,
     "devDependencies": {
         "@playwright/test": "1.62.1",
